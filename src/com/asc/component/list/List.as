@@ -1,4 +1,4 @@
-package listcomponent
+package com.asc.component.list
 {
 	import flash.display.DisplayObject;
 	import flash.display.Shape;
@@ -67,8 +67,6 @@ package listcomponent
 			var mask:Shape = getShape(rowWidth + thumb.width, track.height);
 			addChild(mask);
 			this.mask = mask;
-			
-			onChangeHlr(null);
 		}
 		
 		private function onChangeHlr(e:Event):void
@@ -79,9 +77,9 @@ package listcomponent
 			else
 				index = 0;
 			
-			if (index == selectedIndex)
+			if (index == _selectedIndex)
 				return;
-			selectedIndex = index;
+			_selectedIndex = index;
 			
 			for (var i:int = 0; i < item_list.length; i++)
 			{
@@ -90,6 +88,8 @@ package listcomponent
 				else
 					item_list[i]['selected'] = false;
 			}
+			
+			dispatchEvent(new Event(Event.CHANGE));
 		}
 		
 		private function getShape(w:Number = 100, h:Number = 100, color:uint = 0, alpha:Number = 1):Shape
@@ -162,7 +162,19 @@ package listcomponent
 		
 		public function set selectedIndex(value:int):void
 		{
+			if (_selectedIndex == value)
+				return;
 			_selectedIndex = value;
+			
+			for (var i:int = 0; i < item_list.length; i++)
+			{
+				if (i == _selectedIndex)
+					item_list[i]['selected'] = true;
+				else
+					item_list[i]['selected'] = false;
+			}
+			
+			dispatchEvent(new Event(Event.CHANGE));
 		}
 		
 		public function get list():Vector.<DisplayObject>

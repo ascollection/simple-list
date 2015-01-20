@@ -1,4 +1,4 @@
-package test.component.base
+package component.base
 {
 	import flash.display.DisplayObject;
 	import flash.display.SimpleButton;

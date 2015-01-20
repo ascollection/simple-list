@@ -1,8 +1,8 @@
-package test
+package
 {
+	import com.asc.component.list.List;
 	import flash.display.Sprite;
 	import flash.events.Event;
-	import listcomponent.List;
 	
 	public class TestList extends Sprite
 	{
@@ -16,24 +16,29 @@ package test
 		private function onStage(e:Event):void
 		{
 			list = new List();
-			addChild(list);
-			list.rowCount = 5;
-			list.rowWidth = 636;
-			list.rowHeight = 40;
-			list.y = 100;
-			list.render = ListItem;
-			list.data = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
 			list.addEventListener(ListItem.EVENT_ADD, onStatus, true);
 			list.addEventListener(ListItem.EVENT_FAV, onStatus, true);
 			list.addEventListener(ListItem.EVENT_GOOD, onStatus, true);
 			list.addEventListener(ListItem.EVENT_ADDTO, onStatus, true);
 			list.addEventListener(ListItem.EVENT_SHARE, onStatus, true);
 			list.addEventListener(ListItem.EVENT_TOGGLE_PLAY, onStatus, true);
+			list.addEventListener(Event.CHANGE, onStatus);
+			list.rowCount = 5;
+			list.rowWidth = 636;
+			list.rowHeight = 40;
+			list.y = 100;
+			list.render = ListItem;
+			list.data = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
+			addChild(list);
+			
+			list.selectedIndex = 0;
 		}
 		
 		private function onStatus(e:Event):void
 		{
 			trace(e.type);
+			if (e.type == Event.CHANGE)
+				return;
 			var index:int = (e.target as ListItem).index;
 			if (e.type == ListItem.EVENT_FAV)
 			{

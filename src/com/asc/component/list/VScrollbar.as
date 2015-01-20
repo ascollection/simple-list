@@ -1,4 +1,4 @@
-package listcomponent
+package com.asc.component.list
 {
 	import com.gskinner.motion.GTween;
 	import flash.display.Sprite;
@@ -88,11 +88,10 @@ package listcomponent
 			thumb.buttonMode = true;
 			track.useHandCursor = true;
 			track.buttonMode = true;
+			
 			stage = thumb.stage;
-			if (stage)
-				thumb.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
-			if (stage)
-				track.addEventListener(MouseEvent.CLICK, ontrackMouseClick);
+			thumb.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
+			track.addEventListener(MouseEvent.CLICK, ontrackMouseClick);
 		}
 		
 		private function removeListeners():void
@@ -101,13 +100,13 @@ package listcomponent
 			thumb.buttonMode = false;
 			track.useHandCursor = false;
 			track.buttonMode = false;
+			
 			thumb.removeEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
+			track.removeEventListener(MouseEvent.CLICK, ontrackMouseClick);
 			if (stage)
 				stage.removeEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
 			if (stage)
 				stage.removeEventListener(MouseEvent.MOUSE_UP, onMouseUp);
-			
-			track.removeEventListener(MouseEvent.CLICK, ontrackMouseClick);
 		}
 		
 		private function ontrackMouseClick(event:MouseEvent):void
@@ -127,6 +126,8 @@ package listcomponent
 		
 		private function onMouseDown(event:MouseEvent):void
 		{
+			if (!stage)
+				stage = thumb.stage;
 			offsetY = thumb.y - stage.mouseY;
 			stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
 			stage.addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
@@ -134,6 +135,8 @@ package listcomponent
 		
 		private function onMouseMove(event:MouseEvent):void
 		{
+			if (!stage)
+				stage = thumb.stage;
 			var y:int = stage.mouseY + offsetY;
 			y = y < top ? top : y > bottom ? bottom : y;
 			thumb.y = y;
@@ -144,8 +147,10 @@ package listcomponent
 		
 		private function onMouseUp(event:MouseEvent):void
 		{
-			thumb.stage.removeEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
-			thumb.stage.removeEventListener(MouseEvent.MOUSE_UP, onMouseUp);
+			if (!stage)
+				stage = thumb.stage;
+			stage.removeEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
+			stage.removeEventListener(MouseEvent.MOUSE_UP, onMouseUp);
 			
 			var target:int = (Math.round(position - 0.2) / scalar) + top;
 			tween.setValue("y", target);

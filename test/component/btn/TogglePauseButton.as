@@ -1,10 +1,10 @@
-package test.component.btn 
+package component.btn 
 {
 	import flash.events.Event;
 	import flash.events.MouseEvent;
-	import test.component.base.ExtendSimpleButton;
-	import test.component.base.ToggleButton;
-	import test.resources.ButtonFactory;
+	import component.base.ExtendSimpleButton;
+	import component.base.ToggleButton;
+	import resources.ButtonFactory;
 	
 	public class TogglePauseButton extends ToggleButton 
 	{
@@ -14,7 +14,7 @@ package test.component.btn
 			
 		}
 		
-		override protected function onStage(evt:Event = null):void
+		override protected function init():void
 		{
 			//实例化按钮
 			oneChild = new ExtendSimpleButton
@@ -30,7 +30,7 @@ package test.component.btn
 					, ButtonFactory.getInstance().getButton('play', {width:16, height:42, color:0x999999})
 					);
 			
-			super.onStage(evt);
+			super.init();
 		}
 		
 		override protected function onMouseClick(e:MouseEvent):void 

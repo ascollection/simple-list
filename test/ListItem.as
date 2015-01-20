@@ -1,4 +1,4 @@
-package test
+package
 {
 	import flash.display.Shape;
 	import flash.display.Sprite;
@@ -7,12 +7,12 @@ package test
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 	
-	import test.component.btn.AddButton;
-	import test.component.btn.AddToButton;
-	import test.component.btn.ToggleFavButton;
-	import test.component.btn.GoodButton;
-	import test.component.btn.TogglePauseButton;
-	import test.component.btn.ShareButton;
+	import component.btn.AddButton;
+	import component.btn.AddToButton;
+	import component.btn.ToggleFavButton;
+	import component.btn.GoodButton;
+	import component.btn.TogglePauseButton;
+	import component.btn.ShareButton;
 	
 	public class ListItem extends Sprite
 	{
@@ -81,6 +81,7 @@ package test
 			pause = new TogglePauseButton;
 			pause.addEventListener(MouseEvent.CLICK, onPauseHlr);
 			pause.x = 611;
+			pause.isShowing = false;
 			addChild(pause);
 			
 			graphics.lineStyle(1, 0xf2f2f2, 1);
@@ -136,7 +137,7 @@ package test
 			if (_selected)
 				return;
 			dispatchEvent(new Event(Event.CHANGE));
-			dispatchEvent(new Event(EVENT_TOGGLE_PLAY));
+			//dispatchEvent(new Event(EVENT_TOGGLE_PLAY));
 		}
 		
 		private function onRollOver(e:MouseEvent):void

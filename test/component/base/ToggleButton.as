@@ -1,4 +1,4 @@
-package test.component.base
+package component.base
 {
 	import flash.display.SimpleButton;
 	import flash.display.Sprite;
@@ -10,13 +10,11 @@ package test.component.base
 		
 		public function ToggleButton()
 		{
-			this.addEventListener(Event.ADDED_TO_STAGE, onStage);
+			init();
 		}
 		
-		protected function onStage(evt:Event = null):void
+		protected function init():void
 		{
-			this.removeEventListener(Event.ADDED_TO_STAGE, onStage);
-			
 			if (!oneChild || !twoChild)
 				return;
 			//若无hitTestState 为两个按钮添加响应区域

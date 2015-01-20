@@ -1,15 +1,15 @@
-package test.component.btn 
+package component.btn 
 {
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
-	import test.component.base.ExtendSimpleButton;
-	import test.resources.ButtonFactory;
+	import component.base.ExtendSimpleButton;
+	import resources.ButtonFactory;
 	
-	public class AddButton extends Sprite 
+	public class ShareButton extends Sprite 
 	{
 		
-		public function AddButton() 
+		public function ShareButton() 
 		{
 			this.addEventListener(Event.ADDED_TO_STAGE, onStage);
 		}
@@ -19,10 +19,10 @@ package test.component.btn
 			this.removeEventListener(Event.ADDED_TO_STAGE, onStage);
 			
 			btn = new ExtendSimpleButton
-					( ButtonFactory.getInstance().getButton('add', {width:16, height:40, color:0x999999})
-					, ButtonFactory.getInstance().getButton('add', {width:16, height:40, color:0x00b9f2})
-					, ButtonFactory.getInstance().getButton('add', {width:16, height:40, color:0x00b9f2})
-					, ButtonFactory.getInstance().getButton('add', {width:16, height:40, color:0x999999})
+					( ButtonFactory.getInstance().getButton('share', {width:16, height:40, color:0x999999})
+					, ButtonFactory.getInstance().getButton('share', {width:16, height:40, color:0x00b9f2})
+					, ButtonFactory.getInstance().getButton('share', {width:16, height:40, color:0x00b9f2})
+					, ButtonFactory.getInstance().getButton('share', {width:16, height:40, color:0x999999})
 					);
 			btn.addEventListener(MouseEvent.CLICK, onClick);
 			btn.enabled = true;

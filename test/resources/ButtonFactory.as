@@ -1,4 +1,4 @@
-package test.resources
+package resources
 {
 	import flash.display.DisplayObject;
 	import flash.display.Shape;
